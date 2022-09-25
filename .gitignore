@@ -1,4 +1,10 @@
+output.txt
+
 Patch/
+CharacterTable*/
+NewResourcesPng/
+*TextExtract/
+*TextReplaced/
 
 Bin/*.pdb
 Bin/*.xml
