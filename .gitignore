@@ -1,0 +1,8 @@
+Patch/
+
+Bin/*.pdb
+Bin/*.xml
+Bin/*.config
+
+Fonts/*.ttf
+Fonts/*.json

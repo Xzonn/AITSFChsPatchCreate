@@ -1,0 +1,50 @@
+name: Build
+
+on:
+  push:
+    branches: 
+      - master
+      - test
+  pull_request:
+    branches: 
+      - master
+      - test
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Commit Information
+      id: commit
+      run: |
+        echo "::set-output name=commit_id::commit-$(git rev-parse --short HEAD)"
+        echo "::set-output name=commit_message::$(git log -1 --pretty=%B)"
+    - name: Cache Font Info
+      id: cache-font-info
+      uses: actions/cache@v2
+      with:
+        path: Fonts/FontInfo.json
+        key: ${{ runner.os }}-font-info
+      continue-on-error: true
+    - name: Prepare for Build
+      run: |
+        git clone --depth=1 --branch=patch --single-branch "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" Patch
+    - name: Create Font
+      continue-on-error: true
+      run: |
+        Bin/ATSFChsPatchCreate.exe
+        Compress-Archive Patch/* Patch.zip -force
+    - name: Deploy to GitHub
+      run: |
+        cd Patch/
+        git add -A
+        git -c user.name=GitHub -c user.email=noreply@github.com commit -m "${{ steps.commit.outputs.commit_message }}" -m "Based on commit ${{ steps.commit.outputs.commit_id }}, from GitHub Actions build ${{ github.run_number }}"
+        git push
+        cd ../
+    - uses: actions/upload-artifact@v3
+      continue-on-error: true
+      with:
+        name: Patch
+        path: |
+          Patch.zip
