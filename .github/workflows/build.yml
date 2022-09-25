@@ -34,7 +34,6 @@ jobs:
       continue-on-error: true
       run: |
         Bin/ATSFChsPatchCreate.exe
-        Compress-Archive Patch/* Patch.zip -force
     - name: Deploy to GitHub
       run: |
         cd Patch/
@@ -46,5 +45,4 @@ jobs:
       continue-on-error: true
       with:
         name: Patch
-        path: |
-          Patch.zip
+        path: Patch/
