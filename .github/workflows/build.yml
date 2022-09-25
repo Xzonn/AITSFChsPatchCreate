@@ -19,23 +19,18 @@ jobs:
       id: commit
       run: |
         echo "::set-output name=commit_id::commit-$(git rev-parse --short HEAD)"
-        echo "::set-output name=commit_message::$(git log -1 --pretty=%B)"
-    - name: Cache Font Info
-      id: cache-font-info
-      uses: actions/cache@v2
-      with:
-        path: Fonts/FontInfo.json
-        key: ${{ runner.os }}-font-info
-      continue-on-error: true
+        echo "::set-output name=commit_message::$(git log -1 --pretty=%B)"W
     - name: Prepare for Build
       run: |
         git clone --depth=1 --branch=patch --single-branch "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" Patch
+        Copy-Item Patch/FontInfo.json Fonts/FontInfo.json -Force
     - name: Create Font
       continue-on-error: true
       run: |
         Bin/ATSFChsPatchCreate.exe
     - name: Deploy to GitHub
       run: |
+        Copy-Item Fonts/FontInfo.json Patch/FontInfo.json -Force
         cd Patch/
         git add -A
         git -c user.name=GitHub -c user.email=noreply@github.com commit -m "${{ steps.commit.outputs.commit_message }}" -m "Based on commit ${{ steps.commit.outputs.commit_id }}, from GitHub Actions build ${{ github.run_number }}"
@@ -49,3 +44,4 @@ jobs:
           Patch/
           !Patch/.git/
           !Patch/.gitignore
+          !Patch/FontInfo.json
