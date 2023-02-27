@@ -12,12 +12,12 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Commit Information
       id: commit
       run: |
-        echo "::set-output name=commit_id::commit-$(git rev-parse --short HEAD)"
-        echo "::set-output name=commit_message::$(git log -1 --pretty=%B)"W
+        echo "commit_id=commit-$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        echo "commit_message=$(git log -1 --pretty=%s)" >> $GITHUB_OUTPUT
     - name: Prepare for Build
       run: |
         git clone --depth=1 --branch=patch --single-branch "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" Patch
@@ -25,7 +25,7 @@ jobs:
     - name: Create Font
       continue-on-error: true
       run: |
-        Bin/ATSFChsPatchCreate.exe
+        Bin/AITSFChsPatchCreate.exe
     - name: Deploy to GitHub
       run: |
         Copy-Item Fonts/FontInfo.json Patch/FontInfo.json -Force
