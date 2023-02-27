@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace ATSFChsPatchCreate
+namespace AITSFChsPatchCreate
 {
     public class PositionXorWriter : BinaryWriter
     {

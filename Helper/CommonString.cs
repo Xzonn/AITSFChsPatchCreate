@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ATSFChsPatchCreate
+namespace AITSFChsPatchCreate
 {
     public static class CommonString
     {

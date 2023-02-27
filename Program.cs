@@ -1,7 +1,7 @@
 ﻿using Ionic.Zip;
 using System.IO;
 
-namespace ATSFChsPatchCreate
+namespace AITSFChsPatchCreate
 {
     internal class Program
     {

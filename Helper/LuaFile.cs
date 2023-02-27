@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 
-namespace ATSFChsPatchCreate
+namespace AITSFChsPatchCreate
 {
     public class LuaFile
     {

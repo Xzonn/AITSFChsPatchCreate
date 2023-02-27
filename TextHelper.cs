@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace ATSFChsPatchCreate
+namespace AITSFChsPatchCreate
 {
     internal class TextHelper
     {
@@ -52,6 +52,8 @@ namespace ATSFChsPatchCreate
                     var originalStream = File.CreateText(Path.Combine(path, $"{store}TextExtract", $"{fileNameWithoutExtension}.txt"));
                     Directory.CreateDirectory(Path.Combine(path, $"{store}TextReplaced"));
                     var replacedStream = File.CreateText(Path.Combine(path, $"{store}TextReplaced", $"{fileNameWithoutExtension}.txt"));
+                    Directory.CreateDirectory(Path.Combine(path, $"{store}TextChs"));
+                    var chsStream = File.CreateText(Path.Combine(path, $"{store}TextChs", $"{fileNameWithoutExtension}.txt"));
 #endif
                     foreach (var entry in lua.StringTable)
                     {
@@ -68,11 +70,13 @@ namespace ATSFChsPatchCreate
                         }
 #if DEBUG
                         replacedStream.WriteLine($"{entry.Value.ID}\t{entry.Value.Text.Replace("\\", "\\\\").Replace("\t", "\\t").Replace("\n", "\\n")}");
+                        chsStream.WriteLine($"{entry.Value.ID}\t{ChtConverter.Convert(entry.Value.Text).Replace("\\", "\\\\").Replace("\t", "\\t").Replace("\n", "\\n")}");
 #endif
                     }
 #if DEBUG
                     originalStream.Close();
                     replacedStream.Close();
+                    chsStream.Close();
 #endif
                     if (!replaced)
                     {

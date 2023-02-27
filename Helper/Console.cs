@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ATSFChsPatchCreate
+namespace AITSFChsPatchCreate
 {
     internal class Console
     {

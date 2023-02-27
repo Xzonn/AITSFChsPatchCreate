@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ATSFChsPatchCreate
+namespace AITSFChsPatchCreate
 {
     public class SerializedType
     {

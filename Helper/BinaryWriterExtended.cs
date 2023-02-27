@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 
-namespace ATSFChsPatchCreate
+namespace AITSFChsPatchCreate
 {
     unsafe public class BinaryWriterExtended : BinaryWriter
     {

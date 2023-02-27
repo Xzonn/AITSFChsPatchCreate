@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace ATSFChsPatchCreate
+namespace AITSFChsPatchCreate
 {
 
     internal class ChtConverter

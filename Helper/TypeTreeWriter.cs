@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 
-namespace ATSFChsPatchCreate
+namespace AITSFChsPatchCreate
 {
     public static partial class TypeTreeHelper
     {

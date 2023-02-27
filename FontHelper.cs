@@ -7,7 +7,7 @@ using System.IO;
 using System.IO.Hashing;
 using System.Linq;
 
-namespace ATSFChsPatchCreate
+namespace AITSFChsPatchCreate
 {
     public struct FontInfo
     {

@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 
 
-namespace ATSFChsPatchCreate
+namespace AITSFChsPatchCreate
 {
     public class TMPro_FontPlugin
     {

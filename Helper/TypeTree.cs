@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace ATSFChsPatchCreate
+namespace AITSFChsPatchCreate
 {
     public class TypeTree
     {

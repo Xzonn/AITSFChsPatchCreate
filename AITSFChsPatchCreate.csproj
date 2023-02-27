@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{97E8AA17-5307-48F0-BD32-C95D66575F37}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ATSFChsPatchCreate</RootNamespace>
-    <AssemblyName>ATSFChsPatchCreate</AssemblyName>
+    <RootNamespace>AITSFChsPatchCreate</RootNamespace>
+    <AssemblyName>AITSFChsPatchCreate</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
