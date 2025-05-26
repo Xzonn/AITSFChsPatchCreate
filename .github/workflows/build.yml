@@ -13,6 +13,9 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
     - name: Commit Information
       id: commit
       run: |
@@ -25,10 +28,13 @@ jobs:
     - name: Prepare for Build
       run: |
         Copy-Item Patch/FontInfo.json Fonts/FontInfo.json -Force
-    - name: Create Font
+    - name: Build Patch
       continue-on-error: true
       run: |
         Bin/AITSFChsPatchCreate.exe
+        python -m pip install --upgrade pip
+        python -m pip install -r requirements.txt
+        python Bin\convert_rgba32_bc7_dxt1.py
     - name: Deploy to GitHub
       run: |
         Copy-Item Fonts/FontInfo.json Patch/FontInfo.json -Force
