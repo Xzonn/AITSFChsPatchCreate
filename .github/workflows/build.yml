@@ -3,10 +3,10 @@ name: Build
 on:
   push:
     branches: 
-      - actions
+      - master
   pull_request:
     branches: 
-      - actions
+      - master
 
 jobs:
   build:
@@ -27,28 +27,21 @@ jobs:
         path: Patch
     - name: Prepare for Build
       run: |
-        Copy-Item Patch/FontInfo.json Fonts/FontInfo.json -Force
+        python -m pip install --upgrade pip
+        python -m pip install -r requirements.txt
     - name: Build Patch
       continue-on-error: true
       run: |
-        Bin/AITSFChsPatchCreate.exe
-        python -m pip install --upgrade pip
-        python -m pip install -r requirements.txt
-        python Bin\convert_rgba32_bc7_dxt1.py
+        . Bin\build_patch.ps1
     - name: Deploy to GitHub
       run: |
-        Copy-Item Fonts/FontInfo.json Patch/FontInfo.json -Force
-        cd Patch/
+        Push-Location Patch/
         git add -A
         git -c user.name=GitHub -c user.email=noreply@github.com commit -m "${{ steps.commit.outputs.commit_message }}" -m "Based on commit ${{ steps.commit.outputs.commit_id }}, from GitHub Actions build ${{ github.run_number }}"
         git push
-        cd ../
+        Pop-Location
     - uses: actions/upload-artifact@v4
       continue-on-error: true
       with:
         name: Patch
-        path: |
-          Patch/
-          !Patch/.git/
-          !Patch/.gitignore
-          !Patch/FontInfo.json
+        path: patch.xzp
